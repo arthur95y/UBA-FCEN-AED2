@@ -1,0 +1,236 @@
+\documentclass[10pt,a4paper]{article}
+
+\input{AEDmacros}
+\usepackage{caratula} % Version modificada para usar las macros de algo1 de ~> https://github.com/bcardiff/dc-tex
+
+
+\titulo{Resueltos de la Practica 1 en \LaTeX}
+\subtitulo{}
+
+\fecha{\today}
+
+\materia{Algoritmos y Estructura de Datos II}
+
+
+\integrante{Yale Quispe Arthur Jr}{1573/21}{yalequispe@gmail.com}
+
+
+% Pongan cuantos integrantes quieran
+
+% Declaramos donde van a estar las figuras
+% No es obligatorio, pero suele ser comodo
+\graphicspath{{../static/}}
+
+\begin{document}
+
+\maketitle
+
+\section{Repaso de logica proposicional}
+\subsection{Ejercicio1}
+
+Determinar los valores de verdad de las siguientes proposiciones cuando el valor de verdad de \textbf{a}, \textbf{b} y \textbf{c} es verdadero y el de \textbf{x} e \textbf{y} es falso.
+
+\vspace{0.3cm}
+
+a) (\neg x \vee b) =
+
+(\neg false \vee true ) = (true \vee (no importa el valor de verdad)) ) = true 
+
+\vspace{0.3cm}
+
+b) ((c \vee (y \wedge a)) \vee b) =
+
+((true \vee  (no importa el valor de verdad) \vee (no importa el valor de verdad))) = true  
+
+\vspace{0.3cm}
+
+c) \neg(c \vee y) =
+
+ \neg(true \vee false) = \neg true = false
+
+\vspace{0.3cm}
+
+d) \neg (y \vee c) = false
+
+sol : false, pues vale la conmutatividad del inciso anterior
+
+\vspace{0.3cm}
+
+e) (\neg(c \vee y) \iff (\neg c \wedge \neg y)) = true 
+
+sol : son equivalentes, pues si hacemos la distributividad de la negacion, en un termino, te queda igual al otro termino 
+
+\vspace{0.3cm}
+
+f) ((c \vee y) \wedge (a \vee b)) =
+
+(true \wedge true) = true 
+
+\vspace{0.3cm}
+
+g) ((c \vee y) \wedge (a \vee b)) \iff (c \vee (y \wedge a) \vee b ) =
+
+ true \iff true = true
+
+\vspace{0.3cm}
+
+h) (\neg c \wedge \neg y) = false 
+
+sol : pues es resuelto en el inciso e
+
+\subsection{Ejercicio2}
+
+Considere la siguiente oración: “Si es mi cumpleaños o hay torta, entonces hay torta”.
+\begin{itemize}
+	\item a) Escribir usando lógica proposicional y realizar la tabla de verdad
+	\item b) Asumiendo que la oración es verdadera y hay una torta, qué se puede concluir?
+	\item c) Asumiendo que la oración es verdadera y no hay una torta, qué se puede concluir?
+        \item d) Suponiendo que la oración es mentira (es falsa), se puede concluir algo?
+\end{itemize}
+
+\vspace{0.3cm}
+
+solucion:
+
+\vspace{0.3cm}
+
+a)c = cumple y t = torta 
+
+(c \lor t) \implies t 
+
+\vspace{0.3cm}
+
+b) Haciendo la tabla de verdad, se puede ver que hay dos casos que cumple esta situacion:
+
+1- hay cumple 
+
+2- no hay cumple
+
+\vspace{0.3cm}
+
+c) Viendo la tabla de verdad, se puede conclur que: solo ocurre cuando "no hay cumple".
+
+\vspace{0.3cm}
+
+d) Viendo la tabla, se concluye que: hay cumple  $\wedge$    no hay torta.
+
+\subsection{Ejercicio5}
+
+\vspace{0.3cm}
+
+\underline{Mi observacion sobre el tema Relacion de Fuerza:} 
+
+\underline{Este concepto lo exploraremos en el futuro, especificamente en el capitulo 3, "La Precondicion mas Debil". Esta} 
+
+\underline{WP \textbf{es la precondicion menos exigente de todas y nos dira qué necesita como minimo una precondicion 'P'}  }
+
+\underline{con respecto a un programa \textbf{'S'} y su postcondicion/asegura \textbf{'Q'}, ya dados, para que sea valida o correcta la tripla.}
+
+\vspace{0.3cm}
+
+\underline{Esto quiere decir: Si nos dan un Programa \textbf{'S'}, una Postcondicion \textbf{'Q'} y hayamos (o tenemos) la WP (weakest precondition)}
+
+\underline{¡¡ esta precondicion será la mejor de todas!!. Entonces, a partir de esta WP podemos saber si otras precondiciones son o no }
+
+\underline{correctas (ya que pueden haber muchas precondiciones, pero WP es unica, en mi entender), siempre y cuando las  }
+
+\underline{ precondiciones \textbf{impliquen} la WP o dicho de otra forma  (\textbf{'P'} $\implies$ WP(\textbf{'S'},\textbf{'Q'}) ) sea una tautologia }
+
+\vspace{0.3cm}
+
+\underline{notar que: como la WP es la proposicion mas fuerte, cualquier precondicion que haga verdadera la implicacion es }
+
+\underline{suficiente para afirmar que es correcta la tripla.}
+
+\vspace{0.3cm}
+
+Enunciado: 
+
+Asumiendo que el valor de verdad de b y c es verdadero, el de a es falso y el de x e y es indefinido, indicar
+
+cuáles de los operadores deben ser operadores “luego” para que la expresión no se indefina nunca:
+
+\vspace{0.3cm}
+
+a) True, False
+
+T $\implies$ F = F 
+
+No hay tautologia, por lo tanto $"False"$ es mas fuerte que $"True"$ (siempre "False" es mas fuerte, pues si el
+
+antecedente es "False" no importa lo que haya en el consecuente siempre sera tautologia)
+
+\vspace{0.3cm}
+
+b) (p $\wedge$ q), (p $\vee$ q)
+
+
+(p $\wedge$ q) \implies (p $\vee$ q) = Tautologia? 
+
+Si, se puede ver haciendo la tabla de verdad.
+
+Por lo tanto (p $\wedge$ q) es mas fuerte que (p $\vee$ q).
+
+\vspace{0.3cm}
+
+c) p, (p $\wedge$ q)
+
+p $\implies$ (p $\wedge$ q) = Tautologia ?
+
+No (por tabla), pero ( (p $\wedge$ q) $\implies$ p = Tautologia )
+
+por lo tanto (p $\wedge$ q) es mas fuerte 
+
+\vspace{0.3cm}
+
+d) p, (p $\vee$ q)
+
+( p $\implies$ (p $\vee$ q) ) = Tautologia ? 
+
+si (por tabla), entonces p es mas fuerte.
+
+
+
+\vspace{0.3cm}
+
+e) p , q 
+
+(p $\implies$ q ) = Tautologia?
+
+No (por tabla), en ninguno de los casos.
+
+
+
+\vspace{0.3cm}
+
+f) p, (p $\implies$ q)
+
+( p $\implies$ (p $\implies$ q) ) = Tautologia ? 
+
+No (por tabla), en ninguno de los casos.
+
+\vspace{0.3cm}
+
+\textbf{En esta guia priorice los ejercicios estrellas, de especificacion y relacion de fuerza}
+
+\textbf{No me centre en reglas de equivalencias o en operadores "luego" }
+
+
+
+
+
+
+% IMPORTANTE (esta parte de aca) : 
+% \vee "o" logico
+
+% \wedge  "y" logico
+%-----------------------
+% \leq menor igual
+
+% \geq mayor igual
+%-----------------------
+% \neg  negacion
+
+
+
+\end{document}
