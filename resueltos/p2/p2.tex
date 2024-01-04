@@ -1,0 +1,175 @@
+\documentclass[10pt,a4paper]{article}
+
+\input{AEDmacros}
+\usepackage{caratula} % Version modificada para usar las macros de algo1 de ~> https://github.com/bcardiff/dc-tex
+
+
+\titulo{Resolucion de la Practica 2 en \LaTeX}
+\subtitulo{@AY022}
+
+
+
+\materia{Algoritmos y Estructuras de Datos}
+
+% Pongan cuantos integrantes quieran
+
+% Declaramos donde van a estar las figuras
+% No es obligatorio, pero suele ser comodo
+\graphicspath{{../static/}}
+
+\begin{document}
+
+\maketitle
+\section{Funsiones auxiliares}
+\subsection{Ejercicio1}
+
+Escriba los siguientes predicados sobre números enteros en lenguaje de especificación:
+
+\vspace{0.3cm}
+
+a) pred esCuadrado(x:$\ent$) que sea verdadero si y solo si x es un numero cuadrado 
+
+\textbf{pred esCuadrado} (x:$\ent$) \{
+
+($\exists$y:$\ent$)(y^2 = x $\wedge$ x $\geq$ 0) \}
+
+
+\vspace{0.3cm}
+
+b) pred esPrimo (x:\ent) que sea verdadero sii x es primo 
+
+\textbf{pred esPrimo} (x:\ent) \{
+
+ x $\geq$ 2 $\wedge$ ($\forall$y:$\ent$)(2 $<$ y $<$ x $\implies$ mod x y $\neq$ 0)\}
+
+ \vspace{0.3cm}
+
+ c) pred sonCoprimos (x,y :$\ent$) que sea verdadero sii son coprimos.
+
+ \textbf{pred sonCoprimos} (x,y:$\ent$) \{
+
+$\neg$($\exists$ z: $\ent$)(2 $\leq$ z $\wedge$ mod x z == 0 $\wedge$ mod y z == 0)\}
+
+\vspace{0.3cm}
+
+d) pred mayorPrimoQueDivide (x,y:$\ent$) que sea verdadero sii el mayor primo divide a x 
+
+\textbf{pred mayorPrimoQueDivide} (x,y:$\ent$) \{ 
+
+esPrimo(y) $\wedge$ mod x y == 0 $\wedge$ $\neg$($\exists$ z: $\ent$)(esPrimo(z) $\wedge$ z $>$ y $\wedge$ mod x z == 0)   \} 
+
+\subsection{Ejercicio2}
+
+Escriba los siguientes predicados auxiliares sobre secuencias de enteros, aclarando los tipos de los parámetros
+que recibe
+
+\vspace{0.3cm}
+
+a)esPrefijo, que determina si una secuencia es prefijo de otra. 
+
+\textbf{pred esPrefijo} (pre: seq$<$\ent$>$, s: seq$<$\ent$>$) \{
+
+$|$pre$|$ $<$ $|$s$|$ $\wedge$ subseq(s,0,$|$pre$|) == pre \}
+
+\vspace{0.3cm}
+
+b)estaOrdenada, que determina si la secuencia esta ordenada de menor a mayor.
+
+\textbf{pred estaOrdenada}(s: seq$<$\ent$>$) \{
+
+($\forall$i:\ent)(0 $\leq$ i $<$ $|$s$|$-1 $\implies$ $s_i$  $<$  $s_{i+1}$ ) \}
+
+\vspace{0.3cm}
+
+c)hayUnoParQueDivideAlResto, que determina si hay un elemento par en la secuencia que divide a todos los otros 
+
+elementos de la secuencia
+
+\textbf{pred hayUnoParQueDivideAlResto} (s: seq$<$\ent$>$) \{
+
+($\exists$i: $\ent$) (0 $\leq$ i $<$ $|$s$|$ $\wedge$ mod $s_i$ 2 == 0 $\wedge$ ($\forall$j: $\ent$)(0 $\leq$ j $<$ $|$ s $|$ $\implies$ mod $s_j$ $s_i$ == 0))
+
+\vspace{0.1cm}
+\textbf{¡IMPORTANTE!}: esto nos dice literalmente \textbf{\underline{"hay al menos un elemento que es par}} y que divide a 
+
+¡¡todos los demas!!". (donde lo que esta en negrita es debido al primer cuantificador existencial que es el mas importante 
+
+de los dos cuantificadores en mi opinion).
+
+El concepto anterior y el opuesto que seria  \underline{\textbf{"para todos los elementos}} implica que ¡¡existe uno!! que bla bla.." 
+
+
+ (donde ahora el primer cuantificador es el para todo y es el mas importante) son buenisimos.
+
+\vspace{0.3cm}
+
+d)sinRepetidos, que determina si la secuencia no tiene repetidos
+
+\textbf{pred sinRepetidos}(s: seq$<$\ent$>$) \{
+
+($\forall$ i,j: $\ent$)( 0 $\leq$ i,j $<$ $|$s$|$ $\wedge$ i $\neq$ j $\implies$ $s_i$ $\neq$ $s_j$ ) \}
+
+\vspace{0.3cm}
+
+e) enTresPartes,que determina si en la secuencia aparecen (de izquierda a derecha) primero 0s, después 1s y por último 
+
+2s. Por ejemplo ⟨0, 0, 1, 1, 1, 1, 2⟩ cumple con enTresPartes, pero ⟨0, 1, 3, 0⟩ o ⟨0, 0, 0, 1, 1⟩ no. ¿Cómo modificarı́a la 
+
+expresión para que se admitan cero apariciones de 0s, 1s y 2s (es decir, para que por ejemplo ⟨0, 0, 0, 1, 1⟩ o ⟨⟩ sı́ 
+
+cumplan enTresPartes)?
+
+\textbf{pred enTrePartes} (s: seq $<$$\ent$$>$) \{ 
+
+($\exists$ i,j,k:$\ent$)(0 $\leq$ i,j,k $<$ $|$s$|$ $\wedge$ i$\leq$ j $\leq$k  $\wedge$ $|$k$|$=$|$s$|$ $\wedge$ sonTodos(0,subseq(s,0,i)) $\wedge$ sonTodos(1,subseq(s,i,j)) $\wedge$ sonTodos(2,subseq(s,j,k)))\}
+
+\vspace{0.1cm}
+
+\textbf{¡IMPORTANTE!}: el ejercicio 2(a) y este, que usan subsecuencias, ayudan muchisimo.
+
+
+\vspace{0.5cm}
+
+\textbf{Estos conceptos resaltamos son muy importantes saberlos y tenerlos en cuenta porque para especificacion,}
+
+\textbf{TADs (se vera mas adelante) y para el segundo parcial (invariante de representacion y funcion de .}
+
+\textbf{abstraccion) ayudara muchisimo (al menos para mi).}
+
+
+
+
+\end{document}
+
+
+
+%% modulo          $|$ $|$
+%% subIndices      $s_{i+1}$
+%% {   }           \{ \}
+%% >               $>$
+%% <               $<$
+%% menor igual     \leq
+%% mayor igua      \geq
+%% distinto        \neq
+%% seq:(Entero)    \TLista{\ent}
+%% al cuadrado ^2        
+%% implica     \implies
+%% "subrayado" \underline
+%% "negrita"   \textbf{}
+%% "espacios"  \vspace
+%% o           \vee
+%% y           \wedge
+%% para todo   \forall
+%% existes     \ exists 
+%% Entero      \ent
+
+	\begin{lstlisting}[caption={Ejemplo de código (usando los estilos de la cátedra, ver las macros para más detalles)},label=code:for]
+res := 0;
+i := 0;
+while (i < s.size()) do
+	res := res + s[i];
+	i := i + 1
+endwhile
+	\end{lstlisting}
+%\end{minipage}
+
